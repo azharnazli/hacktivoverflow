@@ -122,6 +122,15 @@ class QuestionController{
     }
   }
 
+  static async deleteQuestion(req, res) {
+    try {
+      let que = await Question.findByIdAndDelete(req.params.id)
+      res.status(200).json(que)
+    } catch (error) {
+      res.status(500).json(error)
+    }
+  }
+
 }
 
 module.exports = QuestionController

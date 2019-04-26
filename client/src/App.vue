@@ -1,8 +1,10 @@
 <template>
   <v-app>
-    <Toolbar/>
+    <Toolbar
+    @searchData="searchData"/>
     <v-content>
-    <router-view>
+    <router-view
+    :search="search">
     </router-view>
     </v-content>
     <Footer/>
@@ -17,11 +19,16 @@ export default {
   name: 'App',
   components: {
     Toolbar,
-    Footer
+    Footer,
   },
   data () {
     return {
-      //
+      search: ''
+    }
+  },
+  methods: {
+    searchData(text) {
+      this.search = text
     }
   }
 }

@@ -10,7 +10,7 @@
       </div>
       <v-layout row wrap>
         <v-flex xs4 offset-xs2>
-          <v-btn light color="red"> clear </v-btn>
+          <v-btn @click="clearForm" light color="red"> clear </v-btn>
         </v-flex>
         <v-flex xs4 offset-xs2>
           <v-btn light color="green"
@@ -43,13 +43,18 @@
           }
         })
           .then((question)=> {
-            console.log(question)
+            this.$router.replace('/questions')
           })
           .catch(err => {
             console.log(err)
           })
+      },
+      clearForm() {
+        this.title = ''
+        this.question = ''
       }
     }
+
   }
 </script>
 <style scoped>

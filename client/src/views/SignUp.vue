@@ -36,6 +36,25 @@
 
     methods: {
       register() {
+        if(this.username == '') {
+          return this.swal.fire({
+            type: 'error',
+            title: 'Error',
+            text: 'please insert your username!',
+          })
+        } else if(this.password == '') {
+          return this.swal.fire({
+            type: 'error',
+            title: 'Error',
+            text: 'please insert your email!',
+          })
+        } else if(this.email == '') {
+          return this.swal.fire({
+            type: 'error',
+            title: 'Error',
+            text: 'please insert your password!',
+          })
+        }
         this.axios({
           method: 'post',
           'url' : 'users',

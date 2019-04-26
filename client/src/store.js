@@ -11,7 +11,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogin : false,
-    questions: []
+    questions: [],
+    drawer : null
 
   },
   mutations: {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     addQuestion(state, payload) {
       state.questions = payload
+    },
+    showBar(state) {
+      state.drawer = !state.drawer
     }
 
   },

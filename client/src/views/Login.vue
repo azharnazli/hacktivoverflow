@@ -33,6 +33,20 @@
 
     methods: {
       login() {
+        if(this.password == '') {
+          return this.swal.fire({
+            type: 'error',
+            title: 'Error',
+            text: 'please insert your email!',
+          })
+        } else if(this.email == '') {
+          return this.swal.fire({
+            type: 'error',
+            title: 'Error',
+            text: 'please insert your password!',
+          })
+        }
+
         this.axios({
             method: 'POST',
             'url': 'users/login',
@@ -50,7 +64,11 @@
             this.$router.replace('/questions')
           })
           .catch(err => {
-            console.log(err.response)
+            this.swal.fire({
+              type: 'error',
+              title: 'Error',
+              text: err.response.data.message+'!',
+            })
           })
 
       },

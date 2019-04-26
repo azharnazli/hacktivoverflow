@@ -108,6 +108,15 @@ class AnswerController {
     }
   }
 
+  static async deleteAnswer(req, res) {
+    try  {
+      let data = await Answer.findByIdAndDelete(req.params.answerId)
+      res.status(200).json(data)
+    } catch (error) {
+      res.status(500).json(error)
+    }
+  }
+
 
 }
 

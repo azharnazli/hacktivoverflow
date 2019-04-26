@@ -12,6 +12,10 @@
     to="/questions" >
       Questions
     </v-btn>
+    <v-form v-if="$route.path == '/questions'">
+      <v-text-field prepend-icon="search"
+      v-model="searchText" solo hide-details single-line></v-text-field>
+    </v-form>
     <v-spacer></v-spacer>
 
     <v-btn v-if="!isLogin" to="/login" class="primary">
@@ -35,7 +39,7 @@ import {mapState} from 'vuex'
 export default {
   data() {
     return {
-      
+      searchText: ''
     }
   } , 
   methods : {
@@ -62,12 +66,17 @@ export default {
     logout() {
       localStorage.clear()
       this.$store.commit('logout')
-    }
+    },
   },
   created() {
     this.checkLogin()
   },
   computed: mapState(['isLogin']),
+  watch: {
+    searchText(val) {
+      this.$emit('searchData',val)
+    }
+  }
   
 }
 </script>

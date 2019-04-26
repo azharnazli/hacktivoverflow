@@ -5,7 +5,7 @@
         
       </v-flex>
       <v-flex xs8>
-        <QuestionCard style="padding: 20px;" v-for="question in questions" :data="question" :key="question.id" />
+        <QuestionCard style="padding: 20px;" v-for="question in filteredData" :data="question" :key="question.id" />
       </v-flex>
       <v-flex xs2>
         <JobCard 
@@ -22,6 +22,7 @@
 import { mapState } from 'vuex';
 
   export default {
+    props: ['search'],
     components: {
       QuestionCard,
       JobCard,      
@@ -40,7 +41,16 @@ import { mapState } from 'vuex';
       this.$store.dispatch('getAllQuestion')
     
     },
-    computed: mapState(['questions'])
+    computed: {
+      ...mapState(['questions']),
+        filteredData: function () {
+        return this.questions.filter(quest => {
+          if(quest.title) {
+            return quest.title.toLowerCase().match(this.search.toLowerCase())
+          } 
+        })
+      }
+    }
   }
 </script>
 <style scoped>
